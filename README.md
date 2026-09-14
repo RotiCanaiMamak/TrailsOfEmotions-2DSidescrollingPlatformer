@@ -82,6 +82,21 @@ Managing the meter encourages players to stay calm, adapt to challenges, and mai
 5. Open `Assets/Scenes/StartScene`.
 6. Press the Play button in the Unity Editor.
 
+## Running the Build
+
+Pre-built Windows versions are available as:
+
+- `TrailsOfEmotions_ProjectBuild.zip`
+- `TrailsOfEmotions_ProjectBuild_Windowed.zip`
+
+Download and extract either ZIP file to a folder on your computer.
+
+1. Open the extracted folder.
+2. Run `FYP.exe`.
+3. The game will launch automatically.
+
+Use `TrailsOfEmotions_ProjectBuild_Windowed.zip` if you prefer to play in a window.
+
 ## Technical Implementation
 
 ### Procedural Terrain Generation
