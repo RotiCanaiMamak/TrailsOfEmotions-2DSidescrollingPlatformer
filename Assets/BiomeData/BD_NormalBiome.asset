@@ -1,0 +1,142 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b738cc49edb278049b0150cb23dca71e, type: 3}
+  m_Name: BD_NormalBiome
+  m_EditorClassIdentifier: Assembly-CSharp::BiomeData
+  biomeName: Normal
+  familyId: Normal
+  selectionWeight: 1
+  globalLightColor: {r: 1, g: 1, b: 1, a: 1}
+  globalLightIntensity: 1
+  emotionMeterColor: {r: 0.57232696, g: 0.57232696, b: 0.57232696, a: 1}
+  gameOverCutscene: 0
+  angerGameOverStartSpeedMultiplier: 1
+  angerGameOverEndSpeedMultiplier: 3
+  sadnessGameOverStartSpeedMultiplier: 1
+  backgroundMusic: {fileID: 8300000, guid: 4f530de559958d047af06878ecd7a303, type: 3}
+  backgroundMusicVolume: 0.5
+  ambientSound: {fileID: 0}
+  ambientSoundVolume: 1
+  chunkPrefab: {fileID: 8828537409174331093, guid: 4f6cbee1ea4159e40b18d94f648a61bd, type: 3}
+  foregroundChunkPrefab: {fileID: 8828537409174331093, guid: 206d9829d6bb66d49b1d00bf7959eae8, type: 3}
+  chunkPrefabOverrides: []
+  startupTerrain: {fileID: 11400000, guid: cbb9a424a8cee634d8833a9319a34545, type: 2}
+  normalTerrain:
+  - sequence: {fileID: 11400000, guid: bbb65537696a080409a0dda5b2c490da, type: 2}
+    weight: 3
+  - sequence: {fileID: 11400000, guid: fa7f5aea0ee13bb4fb9da5b5516b88f5, type: 2}
+    weight: 1
+  - sequence: {fileID: 11400000, guid: 9398174dc7546cb42935a8530cbd97be, type: 2}
+    weight: 1
+  - sequence: {fileID: 11400000, guid: 0565361a13341cc4e80c38b8e953d364, type: 2}
+    weight: 0.7
+  - sequence: {fileID: 11400000, guid: ba7030326fac1ed4fab396dc716796d5, type: 2}
+    weight: 1
+  - sequence: {fileID: 11400000, guid: 6ba08798f38822942b552a091ec9eab1, type: 2}
+    weight: 0.5
+  ziplineSafeTerrain:
+  - sequence: {fileID: 11400000, guid: bbb65537696a080409a0dda5b2c490da, type: 2}
+    weight: 3
+  - sequence: {fileID: 11400000, guid: fa7f5aea0ee13bb4fb9da5b5516b88f5, type: 2}
+    weight: 1
+  - sequence: {fileID: 11400000, guid: 9398174dc7546cb42935a8530cbd97be, type: 2}
+    weight: 1
+  ziplineCutoffChunks:
+  - {fileID: 11400000, guid: 0af7e9fc1c57738479b13757fbf7405f, type: 2}
+  - {fileID: 11400000, guid: e2ca7691d082ce846b0bdf4ba033d1af, type: 2}
+  regulationSpawnChunks:
+  - {fileID: 11400000, guid: 0af7e9fc1c57738479b13757fbf7405f, type: 2}
+  obstacles: []
+  obstacleSpawnRules:
+    allowedChunks: []
+  obstacleSpawnChance: 0
+  minimumObstacleGapChunks: 0
+  candidatesPerChunk: 1
+  minObstacleScale: {x: 1, y: 1, z: 1}
+  maxObstacleScale: {x: 1, y: 1, z: 1}
+  decorations:
+  - prefab: {fileID: 8719645538356055085, guid: 161be46223440ec49a807871bbc9aa4a, type: 3}
+    weight: 1
+    minScale: 0.5
+    maxScale: 0.5
+  - prefab: {fileID: 4634366838959112819, guid: 160dbd5c1e0e4b043b1c21c8a141ba23, type: 3}
+    weight: 1
+    minScale: 0.2
+    maxScale: 0.2
+  - prefab: {fileID: 603652653706481776, guid: 90dccb628769d7147bf01528ec33d7cd, type: 3}
+    weight: 1
+    minScale: 0.2
+    maxScale: 0.2
+  decorationSpawnRules:
+    allowedChunks:
+    - {fileID: 11400000, guid: d1b68b7322308e64da6167f48bb6b4e3, type: 2}
+    - {fileID: 11400000, guid: ecc4ecadf240d6645aa9d93ac7436df7, type: 2}
+    - {fileID: 11400000, guid: 16028bae0093fa345abb730b64bf98ab, type: 2}
+    - {fileID: 11400000, guid: 621a80e320ff2dd40a707ef6445d947e, type: 2}
+    - {fileID: 11400000, guid: e2ca7691d082ce846b0bdf4ba033d1af, type: 2}
+    - {fileID: 11400000, guid: 6d39d9a817c7666499ef3b7ef0db9796, type: 2}
+    - {fileID: 11400000, guid: 5a39588c2b4f6994192704b5548104b5, type: 2}
+    - {fileID: 11400000, guid: 9abb05ca5af1d7847b9177366a1ea505, type: 2}
+    - {fileID: 11400000, guid: 872ba0348694fd148943bd7eee006725, type: 2}
+    - {fileID: 11400000, guid: 6600913bd56f732479615a65249d3478, type: 2}
+    - {fileID: 11400000, guid: 1a7f912084cd40640b28629117063633, type: 2}
+  decorationSpawnChance: 0.1
+  decorationCandidatesPerChunk: 1
+  minDecorationScale: {x: 1, y: 1, z: 1}
+  maxDecorationScale: {x: 1, y: 1, z: 1}
+  foregroundDecorations:
+  - prefab: {fileID: 5779195153302077478, guid: 80437e7eab0d9cc40aee4f55f29b3258, type: 3}
+    weight: 1
+    minScale: 0.5
+    maxScale: 0.5
+  - prefab: {fileID: 7118163592450092472, guid: 4938bbf483b71914584a1c98f77bc6c5, type: 3}
+    weight: 1
+    minScale: 0.2
+    maxScale: 0.2
+  - prefab: {fileID: 1512339623723923436, guid: 453deb708588fd8419d0c29ff07ac62c, type: 3}
+    weight: 1
+    minScale: 0.2
+    maxScale: 0.2
+  foregroundDecorationSpawnRules:
+    allowedChunks:
+    - {fileID: 11400000, guid: d1b68b7322308e64da6167f48bb6b4e3, type: 2}
+    - {fileID: 11400000, guid: ecc4ecadf240d6645aa9d93ac7436df7, type: 2}
+    - {fileID: 11400000, guid: 16028bae0093fa345abb730b64bf98ab, type: 2}
+    - {fileID: 11400000, guid: 621a80e320ff2dd40a707ef6445d947e, type: 2}
+    - {fileID: 11400000, guid: e2ca7691d082ce846b0bdf4ba033d1af, type: 2}
+    - {fileID: 11400000, guid: 0af7e9fc1c57738479b13757fbf7405f, type: 2}
+    - {fileID: 11400000, guid: 6d39d9a817c7666499ef3b7ef0db9796, type: 2}
+    - {fileID: 11400000, guid: 5a39588c2b4f6994192704b5548104b5, type: 2}
+    - {fileID: 11400000, guid: 6600913bd56f732479615a65249d3478, type: 2}
+    - {fileID: 11400000, guid: 1a7f912084cd40640b28629117063633, type: 2}
+    - {fileID: 11400000, guid: 9abb05ca5af1d7847b9177366a1ea505, type: 2}
+    - {fileID: 11400000, guid: 872ba0348694fd148943bd7eee006725, type: 2}
+  foregroundDecorationSpawnChance: 0.1
+  foregroundDecorationCandidatesPerChunk: 1
+  minForegroundDecorationScale: {x: 1, y: 1, z: 1}
+  maxForegroundDecorationScale: {x: 1, y: 1, z: 1}
+  jumpForwardMultiplier: 1
+  jumpForceMultiplier: 1
+  horizontalSpeedMultiplier: 1
+  glideGravityMultiplier: 1
+  airborneGravityMultiplier: 1
+  horizontalSpeedLerpDuration: 0
+  jumpAssistRampPrefab: {fileID: 0}
+  ziplinePrefab: {fileID: 0}
+  ziplineSpawnChance: 0
+  ziplineMinSpanChunks: 3
+  ziplineMaxSpanChunks: 6
+  ziplineMinSequence: 3
+  ziplineMaxSequence: 5
+  regulationMethodPrefab: {fileID: 0}
+  regulationSpawnChance: 0
+  regulationCooldownChunks: 6

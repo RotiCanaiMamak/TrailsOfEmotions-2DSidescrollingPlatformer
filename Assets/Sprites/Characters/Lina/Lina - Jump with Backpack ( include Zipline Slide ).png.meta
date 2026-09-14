@@ -1,0 +1,364 @@
+fileFormatVersion: 2
+guid: 3712be9278bc0c24db718ce80ca1e26c
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -8427411403129111313
+    second: Lina - Jump with Backpack ( include Zipline Slide )_0
+  - first:
+      213: 5842860754536980688
+    second: Lina - Jump with Backpack ( include Zipline Slide )_1
+  - first:
+      213: -7794129884068583251
+    second: Lina - Jump with Backpack ( include Zipline Slide )_2
+  - first:
+      213: -8622076324562798954
+    second: Lina - Jump with Backpack ( include Zipline Slide )_3
+  - first:
+      213: 7888335991942685270
+    second: Lina - Jump with Backpack ( include Zipline Slide )_4
+  - first:
+      213: -6317369245265866859
+    second: Lina - Jump with Backpack ( include Zipline Slide )_5
+  - first:
+      213: 5530971319101881275
+    second: Lina - Jump with Backpack ( include Zipline Slide )_6
+  - first:
+      213: -4013726267106116779
+    second: Lina - Jump with Backpack ( include Zipline Slide )_7
+  - first:
+      213: 4434554297225222419
+    second: Lina - Jump with Backpack ( include Zipline Slide )_8
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Lina - Jump with Backpack ( include Zipline Slide )_0
+      rect:
+        serializedVersion: 2
+        x: 1003
+        y: 203
+        width: 1343
+        height: 2622
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fecb96caaf1db0b80800000000000000
+      internalID: -8427411403129111313
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lina - Jump with Backpack ( include Zipline Slide )_1
+      rect:
+        serializedVersion: 2
+        x: 3422
+        y: 214
+        width: 1519
+        height: 2511
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0d06f3246e2061150800000000000000
+      internalID: 5842860754536980688
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lina - Jump with Backpack ( include Zipline Slide )_2
+      rect:
+        serializedVersion: 2
+        x: 6180
+        y: 237
+        width: 1136
+        height: 3955
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: da8e5de5a20b5d390800000000000000
+      internalID: -7794129884068583251
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lina - Jump with Backpack ( include Zipline Slide )_3
+      rect:
+        serializedVersion: 2
+        x: 8698
+        y: 237
+        width: 1137
+        height: 3955
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 696f028b34b385880800000000000000
+      internalID: -8622076324562798954
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lina - Jump with Backpack ( include Zipline Slide )_4
+      rect:
+        serializedVersion: 2
+        x: 11371
+        y: 237
+        width: 1136
+        height: 3955
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6522cac5acff87d60800000000000000
+      internalID: 7888335991942685270
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lina - Jump with Backpack ( include Zipline Slide )_5
+      rect:
+        serializedVersion: 2
+        x: 13719
+        y: 202
+        width: 1571
+        height: 3205
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 59f43fc64223458a0800000000000000
+      internalID: -6317369245265866859
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lina - Jump with Backpack ( include Zipline Slide )_6
+      rect:
+        serializedVersion: 2
+        x: 16238
+        y: 947
+        width: 1420
+        height: 3263
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bbbf0f14c15f1cc40800000000000000
+      internalID: 5530971319101881275
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lina - Jump with Backpack ( include Zipline Slide )_7
+      rect:
+        serializedVersion: 2
+        x: 18743
+        y: 222
+        width: 1518
+        height: 2515
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 55b3c77c9316c48c0800000000000000
+      internalID: -4013726267106116779
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lina - Jump with Backpack ( include Zipline Slide )_8
+      rect:
+        serializedVersion: 2
+        x: 21307
+        y: 239
+        width: 1404
+        height: 2634
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3199a4753a3ba8d30800000000000000
+      internalID: 4434554297225222419
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Lina - Jump with Backpack ( include Zipline Slide )_0: -8427411403129111313
+      Lina - Jump with Backpack ( include Zipline Slide )_1: 5842860754536980688
+      Lina - Jump with Backpack ( include Zipline Slide )_2: -7794129884068583251
+      Lina - Jump with Backpack ( include Zipline Slide )_3: -8622076324562798954
+      Lina - Jump with Backpack ( include Zipline Slide )_4: 7888335991942685270
+      Lina - Jump with Backpack ( include Zipline Slide )_5: -6317369245265866859
+      Lina - Jump with Backpack ( include Zipline Slide )_6: 5530971319101881275
+      Lina - Jump with Backpack ( include Zipline Slide )_7: -4013726267106116779
+      Lina - Jump with Backpack ( include Zipline Slide )_8: 4434554297225222419
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -1,0 +1,127 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b738cc49edb278049b0150cb23dca71e, type: 3}
+  m_Name: BD_StartScene
+  m_EditorClassIdentifier: Assembly-CSharp::BiomeData
+  biomeName: Start Game Biome
+  familyId: 
+  selectionWeight: 1
+  globalLightColor: {r: 1, g: 1, b: 1, a: 1}
+  globalLightIntensity: 1
+  emotionMeterColor: {r: 1, g: 1, b: 1, a: 1}
+  gameOverCutscene: 0
+  angerGameOverStartSpeedMultiplier: 1
+  angerGameOverEndSpeedMultiplier: 3
+  sadnessGameOverStartSpeedMultiplier: 1
+  backgroundMusic: {fileID: 0}
+  backgroundMusicVolume: 1
+  ambientSound: {fileID: 0}
+  ambientSoundVolume: 1
+  chunkPrefab: {fileID: 8828537409174331093, guid: 1ac301b64f09a0f4bb9ef90cceb0680f, type: 3}
+  foregroundChunkPrefab: {fileID: 8828537409174331093, guid: e16ce03ff5e1c764698552b58fa4dd7b, type: 3}
+  chunkPrefabOverrides: []
+  startupTerrain: {fileID: 11400000, guid: 5aeb8f5df46419a4483a15381bde7e13, type: 2}
+  normalTerrain:
+  - sequence: {fileID: 11400000, guid: 3feba09cbc1a76b43acec7a68a8dd1d8, type: 2}
+    weight: 0
+  - sequence: {fileID: 11400000, guid: dd7f3d48866cda541980f248803f8fe1, type: 2}
+    weight: 0
+  - sequence: {fileID: 11400000, guid: 5aeb8f5df46419a4483a15381bde7e13, type: 2}
+    weight: 0
+  ziplineSafeTerrain: []
+  ziplineCutoffChunks: []
+  regulationSpawnChunks: []
+  obstacles: []
+  obstacleSpawnRules:
+    allowedChunks: []
+  obstacleSpawnChance: 0.3
+  minimumObstacleGapChunks: 0
+  candidatesPerChunk: 1
+  minObstacleScale: {x: 1, y: 1, z: 1}
+  maxObstacleScale: {x: 1, y: 1, z: 1}
+  decorations:
+  - prefab: {fileID: 4265012604973218563, guid: d92450c9f1c915d4491665322e4e2902, type: 3}
+    weight: 1
+    minScale: 0.5
+    maxScale: 0.5
+  - prefab: {fileID: 3849954469230883218, guid: 5fae4738c589af34181c10793f1fc533, type: 3}
+    weight: 1
+    minScale: 0.2
+    maxScale: 0.2
+  - prefab: {fileID: 1114823864043676378, guid: 2aeeff005c0059e4c990231bb7be127f, type: 3}
+    weight: 1
+    minScale: 0.2
+    maxScale: 0.2
+  decorationSpawnRules:
+    allowedChunks:
+    - {fileID: 11400000, guid: d1b68b7322308e64da6167f48bb6b4e3, type: 2}
+    - {fileID: 11400000, guid: ecc4ecadf240d6645aa9d93ac7436df7, type: 2}
+    - {fileID: 11400000, guid: 16028bae0093fa345abb730b64bf98ab, type: 2}
+    - {fileID: 11400000, guid: 621a80e320ff2dd40a707ef6445d947e, type: 2}
+    - {fileID: 11400000, guid: e2ca7691d082ce846b0bdf4ba033d1af, type: 2}
+    - {fileID: 11400000, guid: 6d39d9a817c7666499ef3b7ef0db9796, type: 2}
+    - {fileID: 11400000, guid: 5a39588c2b4f6994192704b5548104b5, type: 2}
+    - {fileID: 11400000, guid: 9abb05ca5af1d7847b9177366a1ea505, type: 2}
+    - {fileID: 11400000, guid: 872ba0348694fd148943bd7eee006725, type: 2}
+    - {fileID: 11400000, guid: 6600913bd56f732479615a65249d3478, type: 2}
+    - {fileID: 11400000, guid: 1a7f912084cd40640b28629117063633, type: 2}
+  decorationSpawnChance: 0.2
+  decorationCandidatesPerChunk: 1
+  minDecorationScale: {x: 1, y: 1, z: 1}
+  maxDecorationScale: {x: 1, y: 1, z: 1}
+  foregroundDecorations:
+  - prefab: {fileID: 1984191595558828871, guid: f329b49849008cf4088c90a7dd019769, type: 3}
+    weight: 1
+    minScale: 0.5
+    maxScale: 0.5
+  - prefab: {fileID: 4213442458027010822, guid: 79c10517c7eefd749ab7ccd8d30edc9b, type: 3}
+    weight: 1
+    minScale: 0.2
+    maxScale: 0.2
+  - prefab: {fileID: 6370292336028921702, guid: 7eccb14aefb3c924e903020e3ebdb771, type: 3}
+    weight: 1
+    minScale: 0.2
+    maxScale: 0.2
+  foregroundDecorationSpawnRules:
+    allowedChunks:
+    - {fileID: 11400000, guid: d1b68b7322308e64da6167f48bb6b4e3, type: 2}
+    - {fileID: 11400000, guid: ecc4ecadf240d6645aa9d93ac7436df7, type: 2}
+    - {fileID: 11400000, guid: 16028bae0093fa345abb730b64bf98ab, type: 2}
+    - {fileID: 11400000, guid: 621a80e320ff2dd40a707ef6445d947e, type: 2}
+    - {fileID: 11400000, guid: e2ca7691d082ce846b0bdf4ba033d1af, type: 2}
+    - {fileID: 11400000, guid: 6d39d9a817c7666499ef3b7ef0db9796, type: 2}
+    - {fileID: 11400000, guid: 5a39588c2b4f6994192704b5548104b5, type: 2}
+    - {fileID: 11400000, guid: 9abb05ca5af1d7847b9177366a1ea505, type: 2}
+    - {fileID: 11400000, guid: 872ba0348694fd148943bd7eee006725, type: 2}
+    - {fileID: 11400000, guid: 6600913bd56f732479615a65249d3478, type: 2}
+    - {fileID: 11400000, guid: 1a7f912084cd40640b28629117063633, type: 2}
+    - {fileID: 11400000, guid: 0af7e9fc1c57738479b13757fbf7405f, type: 2}
+  foregroundDecorationSpawnChance: 0.2
+  foregroundDecorationCandidatesPerChunk: 1
+  minForegroundDecorationScale: {x: 1, y: 1, z: 1}
+  maxForegroundDecorationScale: {x: 1, y: 1, z: 1}
+  jumpForwardMultiplier: 1
+  jumpForceMultiplier: 1
+  horizontalSpeedMultiplier: 1
+  glideGravityMultiplier: 1
+  airborneGravityMultiplier: 1
+  horizontalSpeedLerpDuration: 0
+  jumpAssistRampPrefab: {fileID: 0}
+  ziplinePrefab: {fileID: 0}
+  ziplineSpawnChance: 0
+  ziplineMinSpanChunks: 3
+  ziplineMaxSpanChunks: 6
+  ziplineMinSequence: 1
+  ziplineMaxSequence: 1
+  regulationMethodPrefab: {fileID: 0}
+  regulationSpawnChance: 0
+  regulationCooldownChunks: 6

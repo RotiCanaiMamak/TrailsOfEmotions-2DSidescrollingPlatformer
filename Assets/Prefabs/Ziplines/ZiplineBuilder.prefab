@@ -1,0 +1,69 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &6755009576775561877
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3547234625182003707}
+  - component: {fileID: 5840322416926157797}
+  m_Layer: 0
+  m_Name: ZiplineBuilder
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3547234625182003707
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6755009576775561877}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5840322416926157797
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6755009576775561877}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7579b7b026a84d243bf3714f3cb93d21, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ZiplineBuilder
+  startPolePrefab: {fileID: 8316464432904921463, guid: 7ccc1c9f388353a42b49237263c66310, type: 3}
+  endPolePrefab: {fileID: 8316464432904921463, guid: 7ccc1c9f388353a42b49237263c66310, type: 3}
+  ropeChunkPrefab: {fileID: 3556342530472151033, guid: bd7855f5e8b32c14e9a529233f1a2830, type: 3}
+  startPoint: {x: 0, y: 0, z: 0}
+  endPoint: {x: 10, y: 0, z: 0}
+  startAnchorTransform: {fileID: 0}
+  endAnchorTransform: {fileID: 0}
+  fallbackPoleHeight: 2
+  startPoleZRotation: 0
+  endPoleZRotation: 0
+  sagAmount: 3
+  scaleSagWithDistance: 0
+  sagFactorOfDistance: 0.1
+  sagPeakBias: 0.5
+  curveSamples: 8
+  targetChunkLength: 1.5
+  minChunkCount: 3
+  maxChunkCount: 60
+  buildWalkableCollision: 1
+  collisionEdgeRadius: 0.08
+  oneWaySurfaceArc: 160
+  collisionLayerName: Ground
+  buildOnStart: 0

@@ -1,0 +1,364 @@
+fileFormatVersion: 2
+guid: b0494394e00ca0f46a597961b0e9adb7
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -8659939881447837903
+    second: Lina - Run with Backpack_0
+  - first:
+      213: 8895743773052032480
+    second: Lina - Run with Backpack_1
+  - first:
+      213: 8451506263670069045
+    second: Lina - Run with Backpack_2
+  - first:
+      213: -8557105017509760363
+    second: Lina - Run with Backpack_3
+  - first:
+      213: 8808620000458606818
+    second: Lina - Run with Backpack_4
+  - first:
+      213: 4209869461004401017
+    second: Lina - Run with Backpack_5
+  - first:
+      213: -8335338478008065552
+    second: Lina - Run with Backpack_6
+  - first:
+      213: -1226385512682148014
+    second: Lina - Run with Backpack_7
+  - first:
+      213: -335873512205779038
+    second: Lina - Run with Backpack_8
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Lina - Run with Backpack_0
+      rect:
+        serializedVersion: 2
+        x: 668
+        y: 372
+        width: 2000
+        height: 3688
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 13f20166f86b1d780800000000000000
+      internalID: -8659939881447837903
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lina - Run with Backpack_1
+      rect:
+        serializedVersion: 2
+        x: 3425
+        y: 374
+        width: 1647
+        height: 3622
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0e5d8a574d7047b70800000000000000
+      internalID: 8895743773052032480
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lina - Run with Backpack_2
+      rect:
+        serializedVersion: 2
+        x: 6124
+        y: 374
+        width: 1326
+        height: 3728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5371b073b28c94570800000000000000
+      internalID: 8451506263670069045
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lina - Run with Backpack_3
+      rect:
+        serializedVersion: 2
+        x: 8563
+        y: 393
+        width: 1385
+        height: 3775
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5923e95f25e0f3980800000000000000
+      internalID: -8557105017509760363
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lina - Run with Backpack_4
+      rect:
+        serializedVersion: 2
+        x: 10994
+        y: 500
+        width: 1749
+        height: 3626
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2e88cb868318e3a70800000000000000
+      internalID: 8808620000458606818
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lina - Run with Backpack_5
+      rect:
+        serializedVersion: 2
+        x: 13417
+        y: 375
+        width: 1980
+        height: 3683
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 979beed48f57c6a30800000000000000
+      internalID: 4209869461004401017
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lina - Run with Backpack_6
+      rect:
+        serializedVersion: 2
+        x: 16187
+        y: 368
+        width: 1613
+        height: 3622
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0f12fa711dde25c80800000000000000
+      internalID: -8335338478008065552
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lina - Run with Backpack_7
+      rect:
+        serializedVersion: 2
+        x: 18857
+        y: 368
+        width: 1326
+        height: 3728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 25f25e6bfd00bfee0800000000000000
+      internalID: -1226385512682148014
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lina - Run with Backpack_8
+      rect:
+        serializedVersion: 2
+        x: 21255
+        y: 386
+        width: 1384
+        height: 3776
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2aff287f1dcb65bf0800000000000000
+      internalID: -335873512205779038
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Lina - Run with Backpack_0: -8659939881447837903
+      Lina - Run with Backpack_1: 8895743773052032480
+      Lina - Run with Backpack_2: 8451506263670069045
+      Lina - Run with Backpack_3: -8557105017509760363
+      Lina - Run with Backpack_4: 8808620000458606818
+      Lina - Run with Backpack_5: 4209869461004401017
+      Lina - Run with Backpack_6: -8335338478008065552
+      Lina - Run with Backpack_7: -1226385512682148014
+      Lina - Run with Backpack_8: -335873512205779038
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
