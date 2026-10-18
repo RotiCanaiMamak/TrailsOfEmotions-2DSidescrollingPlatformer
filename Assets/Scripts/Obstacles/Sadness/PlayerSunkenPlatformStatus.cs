@@ -118,6 +118,13 @@ public sealed class PlayerSunkenPlatformStatus : MonoBehaviour, IManualStatusEsc
         UpdateEscapeProgress();
     }
 
+    /// <summary>Removes the status and its visuals immediately without disabling the component.</summary>
+    public void CleanseStatus()
+    {
+        ClearTrapAndNotifyPlatform();
+        RestoreStuckColorImmediately();
+    }
+
     private void OnDisable()
     {
         ClearTrapAndNotifyPlatform();

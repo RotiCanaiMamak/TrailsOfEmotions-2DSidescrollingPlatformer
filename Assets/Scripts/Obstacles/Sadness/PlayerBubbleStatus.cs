@@ -61,6 +61,13 @@ public sealed class PlayerBubbleStatus : MonoBehaviour
         AddEmotionWhenDue();
     }
 
+    /// <summary>Removes the status and its visuals immediately without disabling the component.</summary>
+    public void CleanseStatus()
+    {
+        ClearTrapGameplayState();
+        StopVisualsImmediately();
+    }
+
     private void OnDisable()
     {
         ClearTrapGameplayState();

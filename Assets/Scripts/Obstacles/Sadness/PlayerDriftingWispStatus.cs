@@ -70,6 +70,12 @@ public sealed class PlayerDriftingWispStatus : MonoBehaviour, IManualStatusEscap
         AddEmotionWhenDue();
     }
 
+    /// <summary>Removes the status and its visuals immediately without disabling the component.</summary>
+    public void CleanseStatus()
+    {
+        ClearEffectImmediately();
+    }
+
     private void OnDisable()
     {
         ClearEffectImmediately();

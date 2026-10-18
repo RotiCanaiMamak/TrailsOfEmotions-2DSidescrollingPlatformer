@@ -29,6 +29,12 @@ public class PlayerDarkerSighStatus : MonoBehaviour
         fadeOutDuration = Mathf.Max(0f, fadeOutDuration);
     }
 
+    /// <summary>Removes the status and its visuals immediately without disabling the component.</summary>
+    public void CleanseStatus()
+    {
+        ClearImmediately();
+    }
+
     private void OnDisable()
     {
         ClearImmediately();

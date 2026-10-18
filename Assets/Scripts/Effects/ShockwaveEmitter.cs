@@ -16,15 +16,12 @@ public class ShockwaveEmitter : MonoBehaviour
     [SerializeField] private bool playOnEnable = true;
 
     [Header("Wave")]
-    [Min(0.01f)]
+    [Min(0f)]
     [SerializeField] private float duration = 0.6f;
-    [SerializeField] private float startDistance = 0f;
-    [SerializeField] private float endDistance = 1f;
     [SerializeField] private float strength = -0.1f;
     [SerializeField] private float size = 0.05f;
     [SerializeField] private Vector2 ringSpawnPosition = new Vector2(0.5f, 0.5f);
     [SerializeField] private float xSizeRatio = 1.777f;
-    [SerializeField] private AnimationCurve distanceCurve = AnimationCurve.Linear(0f, 0f, 1f, 1f);
     [SerializeField] private AnimationCurve strengthCurve = AnimationCurve.EaseInOut(0f, 1f, 1f, 0f);
 
     private MaterialPropertyBlock propertyBlock;
@@ -86,12 +83,26 @@ public class ShockwaveEmitter : MonoBehaviour
 
     public void Play()
     {
+        if (!isActiveAndEnabled)
+        {
+            return;
+        }
+
         if (runningWave != null)
         {
             StopCoroutine(runningWave);
+            runningWave = null;
         }
 
-        runningWave = StartCoroutine(PlayWave());
+        ApplyWave(0f, strength * strengthCurve.Evaluate(0f));
+
+        if (duration <= 0f)
+        {
+            SetNeutral();
+            return;
+        }
+
+        runningWave = StartCoroutine(PlayWave(duration));
     }
 
     public void PlayAtScreenPosition(Vector2 normalizedScreenPosition)
@@ -117,31 +128,31 @@ public class ShockwaveEmitter : MonoBehaviour
         PlayAtScreenPosition(new Vector2(viewportPosition.x, viewportPosition.y));
     }
 
-    private IEnumerator PlayWave()
+    private IEnumerator PlayWave(float waveDuration)
     {
         float elapsed = 0f;
 
-        while (elapsed < duration)
+        while (elapsed < waveDuration)
         {
-            float t = duration > 0f ? elapsed / duration : 1f;
-            float distanceT = distanceCurve.Evaluate(t);
+            // Keep the initial value at zero until the next frame.
+            yield return null;
+
+            elapsed += Time.deltaTime;
+            float t = Mathf.Clamp01(elapsed / waveDuration);
             float strengthT = strengthCurve.Evaluate(t);
 
             ApplyWave(
-                Mathf.Lerp(startDistance, endDistance, distanceT),
+                Mathf.Lerp(0f, 1f, t),
                 strength * strengthT);
-
-            elapsed += Time.deltaTime;
-            yield return null;
         }
 
-        ApplyWave(endDistance, 0f);
+        ApplyWave(1f, 0f);
         runningWave = null;
     }
 
     private void SetNeutral()
     {
-        ApplyWave(endDistance, 0f);
+        ApplyWave(1f, 0f);
     }
 
     private void ApplyWave(float waveDistance, float waveStrength)

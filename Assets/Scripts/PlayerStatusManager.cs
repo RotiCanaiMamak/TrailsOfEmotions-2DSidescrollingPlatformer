@@ -47,6 +47,80 @@ public sealed class PlayerStatusManager : MonoBehaviour
     public PlayerTumbleweedStatus TumbleweedStatus => tumbleweedStatus;
     public PlayerEchoInputDelayStatus EchoInputDelayStatus => echoInputDelayStatus;
 
+    /// <summary>Clears all biome status effects, including gameplay restrictions and visuals.</summary>
+    public void CleanseAllStatuses()
+    {
+        if (burnStatus != null)
+        {
+            burnStatus.CleanseStatus();
+        }
+
+        if (sootStatus != null)
+        {
+            sootStatus.CleanseStatus();
+        }
+
+        if (driftingWispStatus != null)
+        {
+            driftingWispStatus.CleanseStatus();
+        }
+
+        if (angerRegulationStatus != null)
+        {
+            angerRegulationStatus.CleanseStatus();
+        }
+
+        if (bubbleStatus != null)
+        {
+            bubbleStatus.CleanseStatus();
+        }
+
+        if (darkerSighStatus != null)
+        {
+            darkerSighStatus.CleanseStatus();
+        }
+
+        if (iceHailStatus != null)
+        {
+            iceHailStatus.CleanseStatus();
+        }
+
+        if (mistSlowStatus != null)
+        {
+            mistSlowStatus.CleanseStatus();
+        }
+
+        if (mudStatus != null)
+        {
+            mudStatus.CleanseStatus();
+        }
+
+        if (sinkingShadowStatus != null)
+        {
+            sinkingShadowStatus.CleanseStatus();
+        }
+
+        if (sunkenPlatformStatus != null)
+        {
+            sunkenPlatformStatus.CleanseStatus();
+        }
+
+        if (crackedTrapStatus != null)
+        {
+            crackedTrapStatus.CleanseStatus();
+        }
+
+        if (tumbleweedStatus != null)
+        {
+            tumbleweedStatus.CleanseStatus();
+        }
+
+        if (echoInputDelayStatus != null)
+        {
+            echoInputDelayStatus.CleanseStatus();
+        }
+    }
+
     public bool TryGetStatus<T>(out T status) where T : Component
     {
         status = GetStatus<T>();

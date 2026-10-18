@@ -105,6 +105,12 @@ public class PlayerBurnStatus : MonoBehaviour, IManualStatusEscapeSource
         nextEmotionTickTime = Time.time + emotionTickInterval;
     }
 
+    /// <summary>Removes the status and its visuals immediately without disabling the component.</summary>
+    public void CleanseStatus()
+    {
+        ClearBurnStateImmediately();
+    }
+
     private void OnDisable()
     {
         ClearBurnStateImmediately();

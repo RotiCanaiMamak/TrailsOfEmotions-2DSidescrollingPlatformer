@@ -42,6 +42,8 @@ public sealed class GroundingRegulation : MonoBehaviour, IRegulationSpawnPlaceme
     private int nextCircleIndex;
     private bool completed;
 
+    public bool IsFinalCircle(int circleIndex) => circleIndex == circleCount - 1;
+
     private void OnValidate()
     {
         firstCircleSurfaceT = Mathf.Clamp01(firstCircleSurfaceT);
@@ -219,7 +221,7 @@ public sealed class GroundingRegulation : MonoBehaviour, IRegulationSpawnPlaceme
     {
         if (LandmineShockwaveManager.Instance != null)
         {
-            LandmineShockwaveManager.Instance.PlayAt(worldPosition);
+            LandmineShockwaveManager.Instance.PlayAtWithPriority(worldPosition);
         }
     }
 

@@ -31,6 +31,12 @@ public sealed class PlayerAngerRegulationStatus : MonoBehaviour
         PruneDestroyedSources();
     }
 
+    /// <summary>Removes the status and its visuals immediately without disabling the component.</summary>
+    public void CleanseStatus()
+    {
+        ClearImmediately();
+    }
+
     private void OnDisable()
     {
         ClearImmediately();

@@ -38153,7 +38153,7 @@ MonoBehaviour:
   - {fileID: 1263033155}
   - {fileID: 674119905}
   - {fileID: 400671029}
-  shockwaveDuration: 0.2
+  shockwaveDuration: 1
   waveDistancePropertyName: _WaveDistanceFromCenter
 --- !u!1 &930502098
 GameObject:

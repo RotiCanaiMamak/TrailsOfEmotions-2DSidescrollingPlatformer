@@ -83,6 +83,12 @@ public sealed class PlayerCrackedTrapStatus : MonoBehaviour, IManualStatusEscape
         }
     }
 
+    /// <summary>Removes the status and its visuals immediately without disabling the component.</summary>
+    public void CleanseStatus()
+    {
+        ClearTrapAndNotifyObstacle();
+    }
+
     private void OnDisable()
     {
         ClearTrapAndNotifyObstacle();

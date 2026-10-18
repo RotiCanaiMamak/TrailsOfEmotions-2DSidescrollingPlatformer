@@ -86,6 +86,13 @@ public class PlayerSootStatus : MonoBehaviour, IManualStatusEscapeSource
         nextEmotionTickTime = Time.time + emotionTickInterval;
     }
 
+    /// <summary>Removes the status and its visuals immediately without disabling the component.</summary>
+    public void CleanseStatus()
+    {
+        ClearEffect(false);
+        ClearSootParticlesImmediately();
+    }
+
     private void OnDisable()
     {
         ClearEffect(false);

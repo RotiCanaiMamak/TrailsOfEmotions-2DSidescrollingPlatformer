@@ -120,7 +120,7 @@ public sealed class GroundingCircle : MonoBehaviour
         }
 
         PlayerController player = other.GetComponentInParent<PlayerController>();
-        if (!IsValidGlidingCharacterTouch(player, other))
+        if (!IsValidCharacterTouch(player, other))
         {
             return;
         }
@@ -138,10 +138,10 @@ public sealed class GroundingCircle : MonoBehaviour
         }
     }
 
-    private bool IsValidGlidingCharacterTouch(PlayerController player, Collider2D other)
+    private bool IsValidCharacterTouch(PlayerController player, Collider2D other)
     {
         return player != null &&
-            player.IsGliding &&
+            (player.IsGliding || (owner != null && owner.IsFinalCircle(circleIndex))) &&
             player.IsCharacterCollider(other);
     }
 

@@ -19,6 +19,8 @@ public sealed class LandmineShockwaveManager : MonoBehaviour
 
     [Header("Shockwave Sprites")]
     [SerializeField] private SpriteRenderer[] shockwaveSprites;
+    [Tooltip("When all sprites are busy, restart the oldest wave. Otherwise skip the new trigger so active waves finish.")]
+    [SerializeField] private bool restartOldestWhenFull = false;
 
     [Header("Wave")]
     [Min(0f)] [SerializeField] private float shockwaveDuration = 0.6f;
@@ -67,12 +69,39 @@ public sealed class LandmineShockwaveManager : MonoBehaviour
         ReleaseRuntimeMaterials();
     }
 
+    private void OnDisable()
+    {
+        if (slots != null)
+        {
+            foreach (ShockwaveSlot slot in slots)
+            {
+                StopSlot(slot);
+            }
+        }
+
+        HideAllSprites();
+    }
+
     public void PlayAt(Vector2 worldPosition)
     {
-        ShockwaveSlot slot = PickSlot();
+        PlayAtInternal(worldPosition, false);
+    }
+
+    public void PlayAtWithPriority(Vector2 worldPosition)
+    {
+        PlayAtInternal(worldPosition, true);
+    }
+
+    private void PlayAtInternal(Vector2 worldPosition, bool forceRestartOldest)
+    {
+        if (!isActiveAndEnabled)
+        {
+            return;
+        }
+
+        ShockwaveSlot slot = PickSlot(forceRestartOldest);
         if (slot == null || slot.Renderer == null)
         {
-            WarnMissingSprites();
             return;
         }
 
@@ -96,18 +125,18 @@ public sealed class LandmineShockwaveManager : MonoBehaviour
         }
 
         SetWaveDistance(slot, 0f);
-        slot.Routine = StartCoroutine(PlayWave(slot));
+        slot.Routine = StartCoroutine(PlayWave(slot, shockwaveDuration));
     }
 
-    private IEnumerator PlayWave(ShockwaveSlot slot)
+    private IEnumerator PlayWave(ShockwaveSlot slot, float duration)
     {
         float elapsed = 0f;
-        while (elapsed < shockwaveDuration)
+        while (elapsed < duration)
         {
-            elapsed += Time.deltaTime;
-            float t = Mathf.Clamp01(elapsed / shockwaveDuration);
-            SetWaveDistance(slot, t);
             yield return null;
+            elapsed += Time.deltaTime;
+            float t = Mathf.Clamp01(elapsed / duration);
+            SetWaveDistance(slot, t);
         }
 
         SetWaveDistance(slot, 1f);
@@ -119,7 +148,7 @@ public sealed class LandmineShockwaveManager : MonoBehaviour
         slot.Routine = null;
     }
 
-    private ShockwaveSlot PickSlot()
+    private ShockwaveSlot PickSlot(bool forceRestartOldest)
     {
         if (slots == null || slots.Length != (shockwaveSprites != null ? shockwaveSprites.Length : 0))
         {
@@ -129,6 +158,7 @@ public sealed class LandmineShockwaveManager : MonoBehaviour
 
         if (slots == null || slots.Length == 0)
         {
+            WarnMissingSprites();
             return null;
         }
 
@@ -136,12 +166,12 @@ public sealed class LandmineShockwaveManager : MonoBehaviour
         for (int i = 0; i < slots.Length; i++)
         {
             ShockwaveSlot slot = slots[i];
-            if (slot == null || slot.Renderer == null)
+            if (slot == null || slot.Renderer == null || !slot.Renderer.gameObject.activeInHierarchy)
             {
                 continue;
             }
 
-            if (slot.Routine == null || !slot.Renderer.enabled)
+            if (slot.Routine == null)
             {
                 return slot;
             }
@@ -152,7 +182,12 @@ public sealed class LandmineShockwaveManager : MonoBehaviour
             }
         }
 
-        return oldestActiveSlot;
+        if (oldestActiveSlot == null)
+        {
+            WarnMissingSprites();
+        }
+
+        return (restartOldestWhenFull || forceRestartOldest) ? oldestActiveSlot : null;
     }
 
     private void StopSlot(ShockwaveSlot slot)
@@ -184,6 +219,8 @@ public sealed class LandmineShockwaveManager : MonoBehaviour
 
     private void BuildSlots()
     {
+        ReleaseRuntimeMaterials();
+
         if (shockwaveSprites == null || shockwaveSprites.Length == 0)
         {
             slots = System.Array.Empty<ShockwaveSlot>();
@@ -194,6 +231,28 @@ public sealed class LandmineShockwaveManager : MonoBehaviour
         for (int i = 0; i < shockwaveSprites.Length; i++)
         {
             SpriteRenderer sprite = shockwaveSprites[i];
+            if (sprite == null)
+            {
+                continue;
+            }
+
+            // One renderer can display only one wave, even if assigned more than once.
+            bool duplicate = false;
+            for (int j = 0; j < i; j++)
+            {
+                if (shockwaveSprites[j] == sprite)
+                {
+                    duplicate = true;
+                    break;
+                }
+            }
+
+            if (duplicate)
+            {
+                Debug.LogWarning("[LandmineShockwaveManager] Duplicate shockwave sprite ignored. Assign a different SpriteRenderer for each simultaneous wave.", this);
+                continue;
+            }
+
             ShockwaveSlot slot = new ShockwaveSlot
             {
                 Renderer = sprite
@@ -219,7 +278,7 @@ public sealed class LandmineShockwaveManager : MonoBehaviour
 
         slot.RuntimeMaterial = new Material(slot.SourceMaterial)
         {
-            name = $"{slot.SourceMaterial.name} (Runtime)"
+            name = $"{slot.SourceMaterial.name} ({slot.Renderer.name} Runtime)"
         };
         slot.Renderer.material = slot.RuntimeMaterial;
     }

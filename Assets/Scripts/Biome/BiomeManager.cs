@@ -135,6 +135,13 @@ public class BiomeManager : MonoBehaviour
         hasPendingTransition = false;
         BiomePhase committedPhase = pendingPhase;
 
+        // Only committed family boundaries cleanse effects. Same-family phase
+        // changes bypass this method and keep their active statuses.
+        foreach (PlayerStatusManager statusManager in FindObjectsByType<PlayerStatusManager>(FindObjectsSortMode.None))
+        {
+            statusManager.CleanseAllStatuses();
+        }
+
         if (committedPhase == BiomePhase.Normal)
         {
             lastCompletedEmotionFamilyId = GetCurrentEmotionFamilyId();

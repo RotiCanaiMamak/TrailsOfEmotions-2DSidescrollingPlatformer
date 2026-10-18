@@ -48,30 +48,30 @@ MonoBehaviour:
   firstCircleSurfaceT: 1
   firstCircleWorldXOffset: 10
   firstCircleHeightAboveSurface: 16
-  nextCircleOffsetFromPlayer: {x: 20, y: 2}
+  nextCircleOffsetFromPlayer: {x: 30, y: 5}
   circleCount: 5
   fadeDuration: 0.2
   fifthCircleBaseScaleMultiplier: 2
   circleForwardLaunchSpeeds:
-  - 1
-  - 2
-  - 3
-  - 4
+  - 8
+  - 10
+  - 12
+  - 14
   circleUpwardLaunchSpeeds:
   - 8
-  - 9
   - 10
-  - 11
+  - 12
+  - 20
   circleLaunchAdhesionLockDuration: 0.12
   finalForwardLaunchSpeed: 24
   finalUpwardLaunchSpeed: 10
   finalLaunchAdhesionLockDuration: 0.12
   emotionReductions:
-  - 4
-  - 5
-  - 6
-  - 7
-  - 8
+  - 24
+  - 26
+  - 28
+  - 30
+  - 60
   obstacleClearRadius: 4
   obstacleClearLayerMask:
     serializedVersion: 2

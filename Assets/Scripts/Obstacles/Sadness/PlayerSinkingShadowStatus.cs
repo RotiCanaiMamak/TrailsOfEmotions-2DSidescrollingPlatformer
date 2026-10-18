@@ -69,6 +69,13 @@ public sealed class PlayerSinkingShadowStatus : MonoBehaviour, IManualStatusEsca
         UpdateEscapeProgress();
     }
 
+    /// <summary>Removes the status and its visuals immediately without disabling the component.</summary>
+    public void CleanseStatus()
+    {
+        ClearTrapAndNotifyShadow();
+        ClearTrappedEffectImmediately();
+    }
+
     private void OnDisable()
     {
         ClearTrapAndNotifyShadow();

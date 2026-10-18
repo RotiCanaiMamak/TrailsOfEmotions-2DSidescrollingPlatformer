@@ -58,6 +58,12 @@ public sealed class PlayerEchoInputDelayStatus : MonoBehaviour
         }
     }
 
+    /// <summary>Removes the status and its visuals immediately without disabling the component.</summary>
+    public void CleanseStatus()
+    {
+        ClearGameplayState();
+    }
+
     private void OnDisable()
     {
         ClearGameplayState();
