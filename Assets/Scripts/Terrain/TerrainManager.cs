@@ -320,6 +320,7 @@ public class TerrainManager : MonoBehaviour
         FillTerrainAhead();
 
         float chunkAliveThreshold = player.position.x - GetChunksToKeepBehindPlayer() * chunkWidth;
+        chunkAliveThreshold = Mathf.Min(chunkAliveThreshold, GetCameraLeftCoverageX());
         while (activeChunks.Count > 0 && activeChunks.Peek().transform.position.x + chunkWidth < chunkAliveThreshold)
         {
             TerrainChunk expiredChunk = activeChunks.Dequeue();
@@ -387,6 +388,7 @@ public class TerrainManager : MonoBehaviour
 
     private void SpawnStartupTerrain()
     {
+        SpawnStartupBackfill();
         TerrainSequenceDefinition startupSequence =
             CurrentBiome != null ? CurrentBiome.startupTerrain : null;
 
@@ -396,6 +398,59 @@ public class TerrainManager : MonoBehaviour
         }
 
         SpawnChunk(GetStartupTerrainChunk());
+    }
+
+    private float GetCameraLeftCoverageX()
+    {
+        Camera mainCamera = Camera.main;
+        if (mainCamera == null || !mainCamera.orthographic)
+        {
+            return player != null ? player.position.x - startupTerrainBackOffsetX : nextSpawnX;
+        }
+
+        CameraFollow follow = mainCamera.GetComponent<CameraFollow>();
+        float size = follow != null && follow.isActiveAndEnabled
+            ? Mathf.Max(mainCamera.orthographicSize, follow.orthographicSize)
+            : mainCamera.orthographicSize;
+        float leftX = mainCamera.transform.position.x - size * mainCamera.aspect;
+        if (player != null && follow != null && follow.isActiveAndEnabled)
+        {
+            // Cover both the initial camera position and its smoothed destination.
+            leftX = Mathf.Min(leftX, player.position.x + follow.offsetX - size * mainCamera.aspect);
+        }
+
+        return leftX - chunkWidth;
+    }
+
+    private void SpawnStartupBackfill()
+    {
+        BiomeData biome = CurrentBiome;
+        TerrainChunk prefab = biome != null ? biome.chunkPrefab : null;
+        if (prefab == null || chunkWidth <= 0f)
+        {
+            return;
+        }
+
+        // Keep the authored startup sequence at its original position. Extend only
+        // the ground behind it, without advancing encounter or sequence schedules.
+        float startupX = nextSpawnX;
+        int count = Mathf.Max(0, Mathf.CeilToInt((startupX - GetCameraLeftCoverageX()) / chunkWidth));
+        for (int i = 0; i < count; i++)
+        {
+            TerrainChunk chunk = Instantiate(prefab, transform);
+            chunk.transform.position = new Vector3(startupX - (count - i) * chunkWidth, currentEndY, 0f);
+            chunk.chunkWidth = chunkWidth;
+            chunk.startY = currentEndY;
+            chunk.endY = currentEndY;
+            chunk.cliffHeight = 0f;
+            chunk.depth = Mathf.Max(baseDepth, depthSafetyMargin);
+            chunk.activeBiome = biome;
+            chunk.Build(Vector3.right, Vector3.right);
+            activeChunks.Enqueue(chunk);
+            lastSpawnedChunk = chunk;
+            ChunkSpawned?.Invoke(new SpawnedChunkInfo(
+                chunk, null, null, biome, chunkWidth, chunk.depth, Vector3.right, Vector3.right));
+        }
     }
 
     private bool SpawnTerrainSequence(TerrainSequenceDefinition sequence)

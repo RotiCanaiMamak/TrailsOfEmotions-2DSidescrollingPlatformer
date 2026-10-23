@@ -30,6 +30,7 @@ public class GameManager : MonoBehaviour
     public bool IsPaused { get; private set; }
 
     private Coroutine startDelayRoutine;
+    private bool isReturningHome;
     private float timeScaleBeforePause = 1f;
     private readonly HashSet<UnityEngine.Object> pauseBlockSources = new HashSet<UnityEngine.Object>();
 
@@ -172,6 +173,12 @@ public class GameManager : MonoBehaviour
 
     public void ReturnHome()
     {
+        if (isReturningHome)
+        {
+            return;
+        }
+
+        isReturningHome = true;
         IsPaused = false;
         IsRunning = false;
         IsWaitingToMove = false;
@@ -183,7 +190,29 @@ public class GameManager : MonoBehaviour
             startDelayRoutine = null;
         }
 
-        SceneManager.LoadScene(HomeSceneName);
+        SetPlayerMovementPaused(true);
+        StartCoroutine(ReturnHomeAfterTransition());
+    }
+
+    private IEnumerator ReturnHomeAfterTransition()
+    {
+        // Let additive loading/unloading finish before replacing the scenes.
+        // The transition also owns persistent start-scene visuals that it must clean up.
+        IrisTransition[] transitions = FindObjectsByType<IrisTransition>(
+            FindObjectsInactive.Include,
+            FindObjectsSortMode.None);
+
+        foreach (IrisTransition transition in transitions)
+        {
+            while (transition != null && transition.IsTransitioning)
+            {
+                yield return null;
+            }
+        }
+
+        // Allow the transition's deferred Destroy calls to finish first.
+        yield return null;
+        SceneManager.LoadScene(HomeSceneName, LoadSceneMode.Single);
     }
 
     public void TriggerGameOver()

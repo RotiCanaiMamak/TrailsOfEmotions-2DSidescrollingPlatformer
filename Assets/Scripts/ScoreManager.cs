@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -27,6 +28,7 @@ public sealed class ScoreManager : MonoBehaviour
     private float rawScore;
     private int score;
     private bool warnedMissingPlayerTag;
+    private bool startupComplete;
 
     public float RawScore => rawScore;
     public int Score => score;
@@ -57,6 +59,36 @@ public sealed class ScoreManager : MonoBehaviour
         ResetScore();
     }
 
+    private IEnumerator Start()
+    {
+        foreach (IrisTransition transition in FindObjectsByType<IrisTransition>(
+            FindObjectsInactive.Include, FindObjectsSortMode.None))
+        {
+            while (transition != null && transition.IsRevealingScene(gameObject.scene))
+            {
+                yield return null;
+            }
+        }
+
+        // Scene loading has installed any automatic UI reveals before Start runs.
+        // Wait for every active reveal in this scene, including manually assigned HUD targets.
+        foreach (GameplayUIReveal reveal in FindObjectsByType<GameplayUIReveal>(
+            FindObjectsInactive.Exclude, FindObjectsSortMode.None))
+        {
+            if (reveal.gameObject.scene != gameObject.scene)
+            {
+                continue;
+            }
+
+            while (reveal != null && reveal.isActiveAndEnabled && !reveal.HasCompleted)
+            {
+                yield return null;
+            }
+        }
+
+        startupComplete = true;
+    }
+
     private void OnDestroy()
     {
         if (Instance == this)
@@ -68,7 +100,7 @@ public sealed class ScoreManager : MonoBehaviour
     private void Update()
     {
         GameManager gameManager = GameManager.Instance;
-        if (gameManager == null || !gameManager.IsRunning || gameManager.IsWaitingToMove)
+        if (!startupComplete || gameManager == null || !gameManager.IsRunning || gameManager.IsWaitingToMove)
         {
             return;
         }
@@ -99,7 +131,7 @@ public sealed class ScoreManager : MonoBehaviour
 
     public void AddPoints(int amount)
     {
-        if (amount <= 0)
+        if (!startupComplete || amount <= 0)
         {
             return;
         }
@@ -110,7 +142,7 @@ public sealed class ScoreManager : MonoBehaviour
 
     public void AddDistance(float meters)
     {
-        if (meters <= 0f || scorePerMeter <= 0f)
+        if (!startupComplete || meters <= 0f || scorePerMeter <= 0f)
         {
             return;
         }

@@ -139,7 +139,10 @@ public sealed class PlayerParticleTrailManager : MonoBehaviour
             return;
         }
 
-        bool shouldPlay = player.IsGrounded;
+        bool shouldPlay = player.isActiveAndEnabled
+            && player.IsGrounded
+            && !player.IsGroundPounding
+            && player.ProgressSpeed > 0.01f;
         if (!shouldPlay)
         {
             StopRunTrail(false);

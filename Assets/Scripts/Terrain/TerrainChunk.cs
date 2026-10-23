@@ -134,6 +134,10 @@ public class TerrainChunk : MonoBehaviour
 
         ConfigureGameplaySurfaceCollision();
         ssc.RefreshSpriteShape();
+        // Generate now instead of waiting for OnWillRenderObject.
+        ssc.BakeMesh().Complete();
+        ssc.BakeCollider();
+        UpdateRenderBounds();
         _bezierReady = true;
         RefreshShadowSurfaceCollider();
     }
@@ -141,6 +145,31 @@ public class TerrainChunk : MonoBehaviour
     public void RebuildExitTangent(Vector3 exitTangent)
     {
         Build(_entryTangent, exitTangent);
+    }
+
+    private void UpdateRenderBounds()
+    {
+        // Prefab bounds describe the original shape, not this runtime spline.
+        // Include the Bezier control points so curved edges are covered as well.
+        Spline spline = ssc.spline;
+        Bounds bounds = new Bounds(spline.GetPosition(0), Vector3.zero);
+        for (int i = 0; i < spline.GetPointCount(); i++)
+        {
+            Vector3 point = spline.GetPosition(i);
+            bounds.Encapsulate(point);
+            bounds.Encapsulate(point + spline.GetLeftTangent(i));
+            bounds.Encapsulate(point + spline.GetRightTangent(i));
+        }
+
+        // Retain sprite overhang from the generated geometry, plus a small margin.
+        var meshBounds = ssc.spriteShapeRenderer.GetBounds();
+        if (meshBounds.Length > 0)
+        {
+            bounds.Encapsulate(meshBounds[0]);
+        }
+        bounds.Expand(2f);
+        ssc.spriteShapeRenderer.SetLocalAABB(bounds);
+        ssc.spriteShapeRenderer.localBounds = bounds;
     }
 
     public void SetSinkingShadowSurfaceColliderEnabled(bool enabled)

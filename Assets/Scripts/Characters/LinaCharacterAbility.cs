@@ -20,6 +20,10 @@ public class LinaCharacterAbility : CharacterAbility
     public bool IsBroken { get; private set; }
     public bool IsPassiveProtecting { get; private set; }
     public bool IsActiveReady =>
+        EmotionValue < 100f &&
+        (Player == null || !Player.IsInputBlocked) &&
+        (GameManager.Instance == null ||
+            (GameManager.Instance.IsRunning && !GameManager.Instance.IsPaused)) &&
         !IsActiveAbilityBlocked &&
         IsActiveFullyCharged &&
         (backpackBulwark == null || !backpackBulwark.IsActive);

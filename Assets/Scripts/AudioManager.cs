@@ -56,8 +56,6 @@ public sealed class AudioManager : MonoBehaviour
     private int activeAmbientSourceIndex;
     private Coroutine musicFadeRoutine;
     private Coroutine ambientFadeRoutine;
-    private Coroutine musicLoopRoutine;
-    private Coroutine ambientLoopRoutine;
     private Coroutine sootLoopFadeRoutine;
     private BiomeManager subscribedBiomeManager;
     private GameManager subscribedGameManager;
@@ -71,6 +69,22 @@ public sealed class AudioManager : MonoBehaviour
 
     private void Awake()
     {
+        // Keep scene controllers on their scene object; only audio persists.
+        if (dontDestroyOnLoad && GetComponents<Component>().Length > 2)
+        {
+            if (Instance == null)
+            {
+                GameObject audioRoot = new GameObject("Persistent Audio Manager");
+                audioRoot.SetActive(false);
+                AudioManager manager = audioRoot.AddComponent<AudioManager>();
+                JsonUtility.FromJsonOverwrite(JsonUtility.ToJson(this), manager);
+                audioRoot.SetActive(true);
+            }
+
+            enabled = false;
+            Destroy(this);
+            return;
+        }
         if (Instance == null)
         {
             Instance = this;
@@ -279,7 +293,6 @@ public sealed class AudioManager : MonoBehaviour
     private void CrossfadeMusic(AudioClip nextClip, float targetVolume, float duration)
     {
         StopRoutine(ref musicFadeRoutine);
-        StopRoutine(ref musicLoopRoutine);
 
         musicFadeRoutine = StartCoroutine(CrossfadeToClipRoutine(
             musicSources,
@@ -288,14 +301,12 @@ public sealed class AudioManager : MonoBehaviour
             targetVolume,
             duration,
             nextActiveIndex => activeMusicSourceIndex = nextActiveIndex,
-            nextActiveIndex => StartMusicLoop(nextActiveIndex, nextClip, targetVolume),
             () => musicFadeRoutine = null));
     }
 
     private void CrossfadeAmbient(AudioClip nextClip, float targetVolume, float duration)
     {
         StopRoutine(ref ambientFadeRoutine);
-        StopRoutine(ref ambientLoopRoutine);
 
         ambientFadeRoutine = StartCoroutine(CrossfadeToClipRoutine(
             ambientSources,
@@ -304,7 +315,6 @@ public sealed class AudioManager : MonoBehaviour
             targetVolume,
             duration,
             nextActiveIndex => activeAmbientSourceIndex = nextActiveIndex,
-            nextActiveIndex => StartAmbientLoop(nextActiveIndex, nextClip, targetVolume),
             () => ambientFadeRoutine = null));
     }
 
@@ -315,7 +325,6 @@ public sealed class AudioManager : MonoBehaviour
         float targetVolume,
         float duration,
         System.Action<int> setActiveIndex,
-        System.Action<int> onClipReady,
         System.Action onComplete)
     {
         AudioSource currentSource = sources[activeIndex];
@@ -326,7 +335,6 @@ public sealed class AudioManager : MonoBehaviour
         if (currentSource.clip == nextClip && currentSource.isPlaying)
         {
             yield return FadeSourceRoutine(currentSource, currentSource.volume, targetVolume, effectiveDuration);
-            onClipReady?.Invoke(activeIndex);
             onComplete?.Invoke();
             yield break;
         }
@@ -349,10 +357,6 @@ public sealed class AudioManager : MonoBehaviour
             currentSource.volume = 0f;
             nextSource.volume = hasNextClip ? targetVolume : 0f;
             setActiveIndex(hasNextClip ? 1 - activeIndex : activeIndex);
-            if (hasNextClip)
-            {
-                onClipReady?.Invoke(1 - activeIndex);
-            }
 
             onComplete?.Invoke();
             yield break;
@@ -373,119 +377,8 @@ public sealed class AudioManager : MonoBehaviour
         currentSource.volume = 0f;
         nextSource.volume = hasNextClip ? targetVolume : 0f;
         setActiveIndex(hasNextClip ? 1 - activeIndex : activeIndex);
-        if (hasNextClip)
-        {
-            onClipReady?.Invoke(1 - activeIndex);
-        }
 
         onComplete?.Invoke();
-    }
-
-    private void StartMusicLoop(int activeIndex, AudioClip clip, float targetVolume)
-    {
-        if (clip == null)
-        {
-            return;
-        }
-
-        StopRoutine(ref musicLoopRoutine);
-        musicLoopRoutine = StartCoroutine(ManagedLoopRoutine(
-            musicSources,
-            activeIndex,
-            clip,
-            targetVolume,
-            nextActiveIndex => activeMusicSourceIndex = nextActiveIndex));
-    }
-
-    private void StartAmbientLoop(int activeIndex, AudioClip clip, float targetVolume)
-    {
-        if (clip == null)
-        {
-            return;
-        }
-
-        StopRoutine(ref ambientLoopRoutine);
-        ambientLoopRoutine = StartCoroutine(ManagedLoopRoutine(
-            ambientSources,
-            activeIndex,
-            clip,
-            targetVolume,
-            nextActiveIndex => activeAmbientSourceIndex = nextActiveIndex));
-    }
-
-    private IEnumerator ManagedLoopRoutine(
-        AudioSource[] sources,
-        int activeIndex,
-        AudioClip clip,
-        float targetVolume,
-        System.Action<int> setActiveIndex)
-    {
-        int currentIndex = activeIndex;
-
-        while (clip != null && clip.length > 0f)
-        {
-            AudioSource currentSource = sources[currentIndex];
-            AudioSource nextSource = sources[1 - currentIndex];
-
-            if (currentSource == null || nextSource == null || currentSource.clip != clip || !currentSource.isPlaying)
-            {
-                yield break;
-            }
-
-            float fadeDuration = GetFadeDurationForClip(clip, biomeFadeDuration);
-            float fadeStartTime = Mathf.Max(0f, clip.length - fadeDuration);
-
-            while (currentSource.clip == clip && currentSource.isPlaying && currentSource.time < fadeStartTime)
-            {
-                yield return null;
-            }
-
-            if (currentSource.clip != clip)
-            {
-                yield break;
-            }
-
-            nextSource.Stop();
-            nextSource.clip = clip;
-            nextSource.time = 0f;
-            nextSource.volume = 0f;
-            nextSource.Play();
-
-            if (fadeDuration <= 0f)
-            {
-                currentSource.Stop();
-                currentSource.clip = null;
-                currentSource.volume = 0f;
-                nextSource.volume = targetVolume;
-                currentIndex = 1 - currentIndex;
-                setActiveIndex?.Invoke(currentIndex);
-                yield return null;
-                continue;
-            }
-
-            float currentStartVolume = currentSource.volume;
-            float elapsed = 0f;
-            while (elapsed < fadeDuration)
-            {
-                if (currentSource.clip != clip || nextSource.clip != clip)
-                {
-                    yield break;
-                }
-
-                elapsed += GetDeltaTime();
-                float t = Mathf.Clamp01(elapsed / fadeDuration);
-                currentSource.volume = Mathf.Lerp(currentStartVolume, 0f, t);
-                nextSource.volume = Mathf.Lerp(0f, targetVolume, t);
-                yield return null;
-            }
-
-            currentSource.Stop();
-            currentSource.clip = null;
-            currentSource.volume = 0f;
-            nextSource.volume = targetVolume;
-            currentIndex = 1 - currentIndex;
-            setActiveIndex?.Invoke(currentIndex);
-        }
     }
 
     private IEnumerator FadeSourceRoutine(AudioSource source, float from, float to, float duration)
@@ -644,10 +537,10 @@ public sealed class AudioManager : MonoBehaviour
 
     private void EnsureAudioSources()
     {
-        musicSources[0] = EnsureSource("Music Source A", false);
-        musicSources[1] = EnsureSource("Music Source B", false);
-        ambientSources[0] = EnsureSource("Ambient Source A", false);
-        ambientSources[1] = EnsureSource("Ambient Source B", false);
+        musicSources[0] = EnsureSource("Music Source A", true);
+        musicSources[1] = EnsureSource("Music Source B", true);
+        ambientSources[0] = EnsureSource("Ambient Source A", true);
+        ambientSources[1] = EnsureSource("Ambient Source B", true);
         sfxSource = EnsureSource("SFX Source", false);
         sootLoopSource = EnsureSource("Soot Loop Source", true);
     }
@@ -710,15 +603,13 @@ public sealed class AudioManager : MonoBehaviour
 
     private float GetDeltaTime()
     {
-        return Time.deltaTime;
+        return Time.unscaledDeltaTime;
     }
 
     private void StopAudioRoutines()
     {
         StopRoutine(ref musicFadeRoutine);
         StopRoutine(ref ambientFadeRoutine);
-        StopRoutine(ref musicLoopRoutine);
-        StopRoutine(ref ambientLoopRoutine);
         StopRoutine(ref sootLoopFadeRoutine);
         StopLoopingSfxImmediately(sootLoopSource);
     }

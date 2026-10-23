@@ -2,7 +2,7 @@ using UnityEngine;
 
 [DisallowMultipleComponent]
 [RequireComponent(typeof(Collider2D))]
-public sealed class TumbleweedObstacle : MonoBehaviour
+public sealed class TumbleweedObstacle : MonoBehaviour, IBackpackAbsorbable
 {
     public enum TumbleweedVariant
     {
@@ -31,9 +31,9 @@ public sealed class TumbleweedObstacle : MonoBehaviour
     [SerializeField] private SpriteRenderer[] alphaRenderers;
 
     [Header("Variant Collision Effects")]
-    [Tooltip("Particle/audio effects played only when the solid tumbleweed hits the player.")]
+    [Tooltip("Particle/audio effects played when the solid tumbleweed hits the player or is absorbed.")]
     [SerializeField] private ObstacleDestroyEffects solidHitEffects;
-    [Tooltip("Particle/audio effects played only when the half-transparent tumbleweed disappears on player touch.")]
+    [Tooltip("Particle/audio effects played when the half-transparent tumbleweed disappears on player touch or is absorbed.")]
     [SerializeField] private ObstacleDestroyEffects halfTransparentDisappearEffects;
 
     private bool consumed;
@@ -113,6 +113,17 @@ public sealed class TumbleweedObstacle : MonoBehaviour
     public void SetRuntimeSpeed(float speed)
     {
         leftSpeed = Mathf.Max(0f, speed);
+    }
+
+    public bool TryAbsorbByBackpack(LinaBackpackBulwark bulwark)
+    {
+        if (consumed)
+        {
+            return false;
+        }
+
+        ConsumeWithVariantEffects(variant);
+        return true;
     }
 
     private void HandleTouch(Collider2D other)

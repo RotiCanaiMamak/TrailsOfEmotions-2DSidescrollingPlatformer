@@ -58,8 +58,14 @@ public class IrisTransition : MonoBehaviour
     private readonly List<Camera> disabledGameDisplayCameras = new List<Camera>();
     private string loadingTransitionSceneName;
     private bool sceneLoadedHandlerRegistered;
+    private string revealingSceneName;
+    private Scene transitionStartScene;
 
     public bool IsTransitioning => runningTransition != null;
+
+    public bool IsRevealingScene(Scene scene) =>
+        IsTransitioning && scene.name == revealingSceneName &&
+        transitionStartScene.IsValid() && transitionStartScene.isLoaded;
 
     private void Reset()
     {
@@ -115,6 +121,7 @@ public class IrisTransition : MonoBehaviour
         }
 
         AudioManager.Instance?.FadeOutStartSceneMusic();
+        revealingSceneName = sceneName;
 
         if (startMenuCanvas != null)
         {
@@ -122,6 +129,7 @@ public class IrisTransition : MonoBehaviour
         }
 
         Scene startScene = SceneManager.GetActiveScene();
+        transitionStartScene = startScene;
         PreserveStartBackground();
         PreserveStartDisplayCameras(startScene);
         SetPreviewVisible(true);
@@ -191,6 +199,7 @@ public class IrisTransition : MonoBehaviour
         previewCamera.enabled = false;
         SetPreviewVisible(false);
         runningTransition = null;
+        revealingSceneName = null;
         DestroyTransitionRoot();
     }
 
@@ -272,6 +281,7 @@ public class IrisTransition : MonoBehaviour
     private void AbortTransition()
     {
         UnregisterSceneLoadedHandler();
+        revealingSceneName = null;
 
         if (startMenuCanvas != null)
         {
@@ -470,6 +480,41 @@ public class IrisTransition : MonoBehaviour
 
         Camera previewCamera = FindCameraInScene(scene, previewCameraName);
         DisableGameDisplayCameras(scene, previewCamera);
+
+        // Explicit scene configuration takes priority over automatic canvas selection.
+        bool hasConfiguredReveal = false;
+        foreach (GameObject root in scene.GetRootGameObjects())
+        {
+            foreach (GameplayUIReveal reveal in root.GetComponentsInChildren<GameplayUIReveal>(true))
+            {
+                if (reveal.enabled && reveal.gameObject.activeInHierarchy)
+                {
+                    reveal.Initialize(this);
+                    hasConfiguredReveal = true;
+                }
+            }
+        }
+
+        if (hasConfiguredReveal)
+        {
+            return;
+        }
+
+        foreach (GameObject root in scene.GetRootGameObjects())
+        {
+            foreach (Canvas canvas in root.GetComponentsInChildren<Canvas>(true))
+            {
+                // Fade each UI hierarchy once; nested canvases inherit its opacity.
+                if (canvas.transform.parent != null &&
+                    canvas.transform.parent.GetComponentInParent<Canvas>(true) != null)
+                {
+                    continue;
+                }
+
+                GameplayUIReveal reveal = canvas.gameObject.AddComponent<GameplayUIReveal>();
+                reveal.Initialize(this);
+            }
+        }
     }
 
     private void DisableGameDisplayCameras(Scene gameScene, Camera previewCamera)

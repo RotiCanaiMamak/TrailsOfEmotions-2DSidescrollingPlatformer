@@ -2,7 +2,7 @@ using UnityEngine;
 
 [DisallowMultipleComponent]
 [RequireComponent(typeof(Collider2D))]
-public class DroppingDebrisObstacle : MonoBehaviour
+public class DroppingDebrisObstacle : MonoBehaviour, IGroundPoundTarget, IBackpackAbsorbable
 {
     [Header("Collision")]
     [SerializeField] private Collider2D debrisCollider;
@@ -113,6 +113,28 @@ public class DroppingDebrisObstacle : MonoBehaviour
         HandleTouch(other);
     }
 
+    public bool TryHandleGroundPound(PlayerController player, Vector2 impactPoint)
+    {
+        if (consumed)
+        {
+            return false;
+        }
+
+        Consume();
+        return true;
+    }
+
+    public bool TryAbsorbByBackpack(LinaBackpackBulwark bulwark)
+    {
+        if (consumed)
+        {
+            return false;
+        }
+
+        Consume();
+        return true;
+    }
+
     internal void HandleTouch(Collider2D other)
     {
         if (consumed || other == null)
@@ -121,7 +143,7 @@ public class DroppingDebrisObstacle : MonoBehaviour
         }
 
         PlayerController player = other.GetComponentInParent<PlayerController>();
-        if (player == null || !player.IsCharacterCollider(other))
+        if (player == null || !player.IsCharacterCollider(other) || player.IsGroundPounding)
         {
             return;
         }

@@ -2,7 +2,7 @@ using UnityEngine;
 
 [DisallowMultipleComponent]
 [RequireComponent(typeof(Collider2D))]
-public sealed class EchoObstacle : MonoBehaviour
+public sealed class EchoObstacle : MonoBehaviour, IBackpackAbsorbable
 {
     [Header("Collision")]
     [SerializeField] private Collider2D echoCollider;
@@ -57,6 +57,17 @@ public sealed class EchoObstacle : MonoBehaviour
     private void OnTriggerStay2D(Collider2D other)
     {
         HandleTouch(other);
+    }
+
+    public bool TryAbsorbByBackpack(LinaBackpackBulwark bulwark)
+    {
+        if (consumed)
+        {
+            return false;
+        }
+
+        ConsumeAt(transform.position);
+        return true;
     }
 
     private void HandleTouch(Collider2D other)

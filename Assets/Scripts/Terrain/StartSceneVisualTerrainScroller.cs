@@ -98,7 +98,12 @@ public class StartSceneVisualTerrainScroller : MonoBehaviour
         ResolvePlacement();
         ResetGenerationState();
 
-        for (int i = 0; i < visibleChunkCount; i++)
+        float originalStartX = nextSpawnX;
+        float leftCoverageX = GetLeftCoverageX();
+        int extraChunks = Mathf.Max(0, Mathf.CeilToInt((originalStartX - leftCoverageX) / chunkWidth));
+        nextSpawnX -= extraChunks * chunkWidth;
+
+        for (int i = 0; i < visibleChunkCount + extraChunks; i++)
         {
             if (!SpawnNextChunkPair())
             {
@@ -219,7 +224,7 @@ public class StartSceneVisualTerrainScroller : MonoBehaviour
 
     private void RecycleExpiredChunks()
     {
-        float leftRecycleX = resolvedRecycleOriginX - recyclePadding;
+        float leftRecycleX = GetLeftCoverageX();
         while (activeChunks.Count > 0)
         {
             VisualChunkPair oldest = activeChunks[0];
@@ -248,6 +253,31 @@ public class StartSceneVisualTerrainScroller : MonoBehaviour
                 break;
             }
         }
+    }
+
+    private float GetLeftCoverageX()
+    {
+        float leftX = resolvedRecycleOriginX - recyclePadding;
+        Camera mainCamera = Camera.main;
+        if (mainCamera == null || !mainCamera.orthographic)
+        {
+            return leftX;
+        }
+
+        StartGameCameraFollow follow = mainCamera.GetComponent<StartGameCameraFollow>();
+        float size = follow != null && follow.isActiveAndEnabled
+            ? Mathf.Max(mainCamera.orthographicSize, follow.orthographicSize)
+            : mainCamera.orthographicSize;
+        float halfWidth = size * mainCamera.aspect;
+        float cameraLeftX = mainCamera.transform.position.x - halfWidth;
+        if (visualPlacementTarget != null && follow != null && follow.isActiveAndEnabled)
+        {
+            cameraLeftX = Mathf.Min(cameraLeftX, visualPlacementTarget.position.x + follow.offsetX - halfWidth);
+        }
+
+        // Keep a complete chunk beyond the view before recycling, including while
+        // the start camera is still moving toward its target.
+        return Mathf.Min(leftX, cameraLeftX - chunkWidth);
     }
 
     private bool SpawnNextChunkPair()

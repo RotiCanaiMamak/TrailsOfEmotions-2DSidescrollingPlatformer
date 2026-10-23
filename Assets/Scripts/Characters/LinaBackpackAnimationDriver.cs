@@ -1,6 +1,7 @@
 using UnityEngine;
 
 [DisallowMultipleComponent]
+[DefaultExecutionOrder(100)]
 public class LinaBackpackAnimationDriver : MonoBehaviour
 {
     private const string DefaultBackpackBulwarkActiveParameter = "BackpackBulwarkActive";
@@ -35,6 +36,8 @@ public class LinaBackpackAnimationDriver : MonoBehaviour
     private bool reportedMissingGliding;
     private bool reportedMissingZiplining;
     private RuntimeAnimatorController cachedController;
+    private Animator pausedRunAnimator;
+    private float speedBeforeRunPause;
 
     private void Awake()
     {
@@ -54,6 +57,49 @@ public class LinaBackpackAnimationDriver : MonoBehaviour
         ResolveReferences();
         RefreshParameterCache(false);
         ApplyAnimatorState();
+        PauseRunIfStopped();
+    }
+
+    private void PauseRunIfStopped()
+    {
+        if (animator == null || player == null || player.IsGroundPounding ||
+            player.IsGliding || player.IsOnZipline)
+        {
+            return;
+        }
+
+        bool stopped = player.IsMovementRooted ||
+            (player.IsGrounded && player.ProgressSpeed <= 0.05f);
+        if (!stopped)
+        {
+            return;
+        }
+
+        // Pause through Animator evaluation, then restore before status effects
+        // update next frame so effects such as mist never capture a zero speed.
+        pausedRunAnimator = animator;
+        speedBeforeRunPause = animator.speed;
+        animator.speed = 0f;
+    }
+
+    private void LateUpdate()
+    {
+        RestoreRunAnimationSpeed();
+    }
+
+    private void OnDisable()
+    {
+        RestoreRunAnimationSpeed();
+    }
+
+    private void RestoreRunAnimationSpeed()
+    {
+        if (pausedRunAnimator != null)
+        {
+            pausedRunAnimator.speed = speedBeforeRunPause;
+        }
+
+        pausedRunAnimator = null;
     }
 
     private void ResolveReferences()
@@ -131,7 +177,7 @@ public class LinaBackpackAnimationDriver : MonoBehaviour
 
         TrySetBool(
             jumpingHash,
-            player != null && player.IsAirborne && !player.IsGliding,
+            player != null && !player.IsMovementRooted && player.IsAirborne && !player.IsGliding,
             canSetJumping,
             jumpingParameter,
             ref reportedMissingJumping);

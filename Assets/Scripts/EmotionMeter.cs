@@ -42,9 +42,20 @@ public class EmotionMeter : MonoBehaviour
     public float EmotionAcceptanceMultiplier { get; private set; } = 1f;
 
     private readonly Dictionary<Object, EmotionModifier> emotionModifiers = new Dictionary<Object, EmotionModifier>();
+    private IrisTransition startupTransition;
 
     void Awake()
     {
+        foreach (IrisTransition transition in FindObjectsByType<IrisTransition>(
+            FindObjectsInactive.Include, FindObjectsSortMode.None))
+        {
+            if (transition.IsRevealingScene(gameObject.scene))
+            {
+                startupTransition = transition;
+                break;
+            }
+        }
+
         if (onObstacleEmotionAdded == null)
         {
             onObstacleEmotionAdded = new UnityEvent<float>();
@@ -128,6 +139,11 @@ public class EmotionMeter : MonoBehaviour
 
     private float ApplyDelta(float delta, bool applyEmotionAcceptance)
     {
+        if (startupTransition != null && startupTransition.IsRevealingScene(gameObject.scene))
+        {
+            return 0f;
+        }
+
         int prev = StateIndex;
         float previousValue = Value;
         if (applyEmotionAcceptance && delta < 0f)

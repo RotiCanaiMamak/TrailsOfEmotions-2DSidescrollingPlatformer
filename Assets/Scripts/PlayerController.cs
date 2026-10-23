@@ -251,6 +251,7 @@ public class PlayerController : MonoBehaviour
     public bool IsAirborne => !isGrounded && !isGroundPounding;
     public bool IsInputBlocked => PruneAndCheckInputBlocks();
     public bool IsJumpBlocked => PruneAndCheckJumpBlocks();
+    public bool IsInputDelayed => GetActiveInputDelay() > 0f;
     public bool IsGlideInputHeld => !IsInputBlocked && GetDelayedKey(KeyCode.Space);
     public bool IsMovementRooted => PruneAndCheckMovementRoots();
     public float BaseMoveSpeed => moveSpeed;
